@@ -31,13 +31,15 @@ module.exports = function (clientInstance) {
   };
   //Function that removes the box with the specified id
   this.removeBox = (id) => {
-    let index = this.findBoxById(id);
+    let index = this.boxes.indexOf(this.findBoxById(id));
     this.boxes.splice(index, 1);
   };
   //Function that replaces a box with updated information
   this.updateBox = (newBox) => {
-    let index = this.findBoxById(newBox.id);
+    let index = this.boxes.indexOf(this.findBoxById(newBox.id));
+    console.log(`API: box index is ${index}`);
     this.boxes.splice(index, 1, newBox);
+    console.log(this.boxes);
     clientInstance.publish(`boxes/${newBox.id}`, `${JSON.stringify(newBox)}`);
   };
 };
